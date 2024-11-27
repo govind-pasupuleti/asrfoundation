@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASR Platform</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(120deg, #1e3a8a, #00b894); /* Blue to Green gradient */
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        .header h1 {
+            font-size: 3rem;
+            animation: slideInFromLeft 1.5s;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin: 15px 0;
+            animation: fadeIn 2s;
+        }
+
+        /* Main Container Styles */
+        .container {
+            text-align: center;
+            margin: 50px auto;
+            padding: 0 20px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        .container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #444;
+            animation: fadeInLeft 1s ease-in-out;
+        }
+        .container p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        /* Feature Section */
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            width: 280px;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .feature img {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+        .feature h3 {
+            font-size: 1.2rem;
+            color: #222;
+            margin: 10px 0;
+        }
+        .feature p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        /* .btn {
+            display: inline-block;
+            margin: 20px 10px;
+            padding: 12px 30px;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(120deg, #1e3a8a, #00b894); 
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, background 0.3s;
+        }
+        .btn:hover {
+            background: linear-gradient(120deg, #00b894, #1e3a8a); 
+            transform: translateY(-3px);
+        } */
+
+        /* Buttons */
+.btn {
+    display: inline-block;
+    margin: 20px 10px;
+    padding: 12px 30px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    background: linear-gradient(120deg, #1e3a8a, #00b894); /* Blue to Green gradient */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.btn:hover {
+    background: linear-gradient(120deg, #00b894, #1e3a8a); /* Reverse gradient */
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .btn {
+        width: 100%;  /* Make buttons full-width on smaller screens */
+        font-size: 16px;  /* Slightly smaller font */
+        padding: 12px 0;  /* Adjust padding for better fit */
+        text-align: center; /* Ensure text is centered */
+    }
+    .container .btn {
+        margin: 10px 0; /* Adjust margin for buttons inside containers */
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        font-size: 14px;  /* Further reduce font size on very small screens */
+        padding: 10px 0;  /* Further reduce padding */
+    }
+}
+
+
+        /* Main Content Section */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .image, .text-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Text Content Styles */
+        .text-content {
+            display: block; /* Ensures it occupies full width */
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            color: #444;
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Ensure the list items are stacked vertically */
+        .text-content ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .text-content ul li {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 15px; /* Adds space between list items */
+            line-height: 1.5;
+        }
+
+        /* Flexbox to align social icons side by side */
+        .text-content ul li.social-links {
+            display: flex; /* Align items horizontally */
+            gap: 15px; /* Space between the items */
+        }
+
+        .text-content ul li.social-links a {
+            display: inline-block; /* Keeps each icon as a block-level element */
+        }
+
+        .text-content a {
+            color: #00b894;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .text-content a:hover {
+            color: #1e3a8a;
+        }
+
+        .text-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+            font-weight: 600;
+            animation: fadeInLeft 1s ease-in-out;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #1e3a8a;
+            color: #222;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .footer a {
+            color: #00b894;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #fff;
+        }
+        .footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .footer img{
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .features {
+                flex-direction: column;
+            }
+            .feature {
+                width: 90%;
+                margin: 10px auto;
+            }
+            .content {
+                grid-template-columns: 1fr;
+            }
+            .container h2 {
+                font-size: 2rem;
+            }
+            .container p {
+                font-size: 1rem;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+                font-size: 16px;
+                margin: 10px 0;
+            }
+            .footer p {
+                font-size: 0.8rem;
+                
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 480px) {
+            .header p {
+                font-size: 1rem;
+            }
+            .footer {
+                padding: 30px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to ASR Foundation</h1>
+        <p>Empowering possibilities, one step at a time.</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Discover the Power of ASR</h2>
+        <p>Our platform provides an array of features to enhance your experience.</p>
+        <p>Join us today and start exploring the endless possibilities.</p>
+    </div>
+
+    <div class="container">
+        <a href="asr_signup.html" class="btn">Sign Up</a>
+        <a href="asr_login.html" class="btn">Login</a>
+        <h2>Why Choose ASR?</h2>
+        <div class="features">
+            <div class="feature">
+                <img src="/images/partners.png" height="80" width="80" alt="Community">
+                <h3>Strong Community</h3>
+                <p>Be a part of a thriving community driven by collaboration.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/increase.png" alt="Growth">
+                <h3>Endless Growth</h3>
+                <p>Opportunities that pave the way for your personal and professional growth.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/cyber-security.png" alt="Security">
+                <h3>Trusted Security</h3>
+                <p>Your data and work are safe with our advanced security systems.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="content">
+        <div class="image">
+            <img src="https://rummy1.net/img/refer.gif" alt="Contact Image">
+        </div>
+
+        <div class="text-content">
+            <h3>Our Contact Information</h3>
+            <p>Get in touch with us via:</p>
+            <ul>
+                <li><img src="/images/phone.png" width="50" height="50" alt="">7337303049</li>
+                <li><img src="images/map.png" width="45" height="40" alt=""> HO: D.No.48-18-15/5, Ramataikes, Main Road, Opp Canara Bank, Visakhapatnam, Andhra Pradesh-530013</li>
+                <li class="social-links">
+                    <a href="https://www.facebook.com/share/1nLmDfYmwDk955bf/?mibextid=qi2Omg" target="_blank">
+                        <img src="images/facebook.png" width="50" height="50" alt="">
+                    </a>
+                    <a href="https://www.instagram.com/asr_foundation24/profilecard/?igsh=MTRjZTV1cXI3MjRmaA==" target="_blank">
+                        <img src="/images/instagram.png" width="50" height="50" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- WhatsApp Integration -->
+    <div style="position: fixed; bottom: 30px; right: 30px;">
+        <a href="https://wa.me/7337303049" target="_blank">
+            <img src="/images/whatsapp.png" alt="WhatsApp" style="width: 60px; height: 60px;">
+        </a>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024  All rights reserved.</p>
+        
+            <a href="https://www.facebook.com/share/1nLmDfYmwDk955bf/?mibextid=qi2Omg" target="_blank"><img src="images/facebook_footer.png" width="70" height="70" alt=""></a><a href="https://www.instagram.com/asr_foundation24/profilecard/?igsh=MTRjZTV1cXI3MjRmaA==" target="_blank"><img src="/images/instagram_footer.png" width="80" height="80" alt=""></a> 
+        
+    </div>
+</body>
+</html>

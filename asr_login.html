@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+           
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in-out;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .login-container:hover {
+            transform: scale(1);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .login-container h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #00b894;
+            margin: 10px auto 0;
+            border-radius: 3px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 50px;
+            }
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .login-container input {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .login-container input:focus {
+            border-color: #1e3a8a;
+            box-shadow: 0px 0px 8px rgba(30, 58, 138, 0.3);
+        }
+
+        .login-container button {
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(120deg, #1e3a8a, #00b894);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            animation: buttonPop 1s ease-in-out;
+        }
+
+        .login-container button:hover {
+            background: linear-gradient(120deg, #00b894, #1e3a8a);
+            transform: translateY(-3px);
+        }
+
+        @keyframes buttonPop {
+            0% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .error {
+            font-size: 12px;
+            color: red;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 30px;
+                max-width: 100%;
+            }
+
+            .login-container h2 {
+                font-size: 24px;
+            }
+
+            .login-container input, button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h2 {
+                font-size: 20px;
+            }
+
+            .login-container input, button {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .login-container label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <span class="error" id="emailError"></span>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <span class="error" id="passwordError"></span>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            let valid = true;
+
+            // Reset errors
+            document.querySelectorAll('.error').forEach(error => error.textContent = '');
+
+            // Validate Email
+            if (!email.includes('@') || !email.includes('.')) {
+                document.getElementById('emailError').textContent = 'Enter a valid email.';
+                valid = false;
+            }
+
+            // Validate Password
+            if (password.trim() === '') {
+                document.getElementById('passwordError').textContent = 'Password is required.';
+                valid = false;
+            }
+
+            if (valid) {
+                alert('Login successful!');
+                // Add your login API call or form submission logic here
+            }
+        });
+    </script>
+</body>
+</html>
